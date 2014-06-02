@@ -1,6 +1,6 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages;
 
-import me.alb_i986.selenium.forbes.lib.gui.pages.components.TopMenu;
+import me.alb_i986.selenium.forbes.lib.gui.pages.components.TopNavBar;
 
 import org.openqa.selenium.*;
 
@@ -9,7 +9,7 @@ public interface Page {
 	public Page gotoBack();
 	public Page gotoHome();
 
-	public TopMenu getTopMenu();
+	public TopNavBar getTopMenu();
 	
 	/**
 	 * @see WebDriver#getTitle()

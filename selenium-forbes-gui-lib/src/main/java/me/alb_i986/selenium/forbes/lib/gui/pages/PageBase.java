@@ -2,34 +2,44 @@ package me.alb_i986.selenium.forbes.lib.gui.pages;
 
 import java.util.List;
 
-import me.alb_i986.selenium.forbes.lib.gui.pages.components.TopMenu;
+import me.alb_i986.selenium.forbes.lib.gui.pages.components.TopNavBar;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
 public abstract class PageBase
 		extends LoadableComponent<PageBase> implements Page {
 	
-	public static final String BASE_URL = "http://www.forbes.com";
+	public static String BASE_URL = "http://www.forbes.com";
+	
+	protected static final Logger logger = Logger.getLogger(Page.class);
 
 	protected WebDriver driver;
 	protected Page previousPage;
 
-	private TopMenu topMenu = new TopMenu(driver, this);
+	private TopNavBar topNavBar;
 	
 	
 	public PageBase(WebDriver driver, Page previous) {
 		this.driver = driver;
 		this.previousPage = previous;
+		PageFactory.initElements(driver, this);
+		topNavBar = new TopNavBar(driver, this);
 	}
 	
-	
+
+	/**
+	 * @see WebDriver#getTitle()
+	 */
 	public String getTitle() {
 		return driver.getTitle();
 	}
-	
+
+	/**
+	 * @see WebDriver#getPageSource()
+	 */
 	public String getPageSource() {
 		return driver.getPageSource();
 	}
@@ -45,20 +55,20 @@ public abstract class PageBase
 		return previousPage;
 	}
 
+	/**
+	 * @see TopNavBar#gotoHome()
+	 */
 	public HomePage gotoHome() {
-		return topMenu.gotoHome();
+		return topNavBar.gotoHome();
 	}
 	
-
-	public TopMenu getTopMenu() {
-		return topMenu ;
+	public TopNavBar getTopMenu() {
+		return topNavBar ;
 	}
-
 	
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
-
 
 	/**
 	 * @param locator
@@ -82,6 +92,7 @@ public abstract class PageBase
 
 	@Override
 	protected void load() {
+		driver.get(BASE_URL);
 		List<WebElement> continueLinks = getElements(By.cssSelector("a.continue"));
 		if(!continueLinks.isEmpty()) {
 			WebElement continueLink = continueLinks.get(0);
