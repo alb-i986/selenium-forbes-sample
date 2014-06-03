@@ -7,10 +7,8 @@ import me.alb_i986.selenium.forbes.lib.gui.pages.components.TopNavBar;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.LoadableComponent;
 
-public abstract class PageBase
-		extends LoadableComponent<PageBase> implements Page {
+public abstract class PageBase implements Page {
 	
 	public static String BASE_URL = "http://www.forbes.com";
 	
@@ -26,10 +24,11 @@ public abstract class PageBase
 		this.driver = driver;
 		this.previousPage = previous;
 		PageFactory.initElements(driver, this);
+		waitUntilIsLoaded();
 		topNavBar = new TopNavBar(driver, this);
 	}
-		
 	
+
 	/**
 	 * @see WebDriver.Navigation#back()
 	 */
@@ -92,14 +91,6 @@ public abstract class PageBase
 		return driver.findElements(locator);
 	}
 
-	@Override
-	protected void load() {
-		driver.get(BASE_URL);
-		List<WebElement> continueLinks = getElements(By.cssSelector("a.continue"));
-		if(!continueLinks.isEmpty()) {
-			WebElement continueLink = continueLinks.get(0);
-			if(continueLink.isDisplayed())
-				continueLink.click();
-		}
-	}
+	protected abstract void waitUntilIsLoaded();
+	
 }

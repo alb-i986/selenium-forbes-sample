@@ -1,12 +1,14 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class WelcomePage extends PageBase {
 
+	private static final String EXPECTED_TITLE = "Welcome to Forbes";
+	
 	@FindBy(css = "a.continue")
 	private WebElement continueLink;
 	
@@ -19,16 +21,8 @@ public class WelcomePage extends PageBase {
 	}
 	
 	@Override
-	protected void isLoaded() throws Error {
-		Assert.assertEquals("title does not match", "Welcome to Forbes", getTitle());
-	}
-
-	@Override
-	protected void load() {
-		// TODO Auto-generated method stub
-		super.load();
+	protected void waitUntilIsLoaded() {
+		PageHelper.ExplicitlyWait.until(ExpectedConditions.titleIs(EXPECTED_TITLE), driver);
 	}
 	
-	
-
 }

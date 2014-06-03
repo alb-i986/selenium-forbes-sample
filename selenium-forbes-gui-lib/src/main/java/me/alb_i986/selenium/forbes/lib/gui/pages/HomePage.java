@@ -1,12 +1,12 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class HomePage extends PageBase {
 
-	private static final String expectedTitle = "Information for the World's Business Leaders - Forbes.com";
+	private static final String EXPECTED_TITLE = "Information for the World's Business Leaders - Forbes.com";
 	
 	public HomePage(WebDriver driver, Page previous) {
 		super(driver, previous);
@@ -17,16 +17,10 @@ public class HomePage extends PageBase {
 		return new HomePage(driver, null);
 	}
 	
-
 	@Override
-	protected void load() {
-		super.load();
-		driver.get(BASE_URL);
-	}
-
-	@Override
-	protected void isLoaded() throws Error {
-		Assert.assertEquals("title does not match", expectedTitle, getTitle());
+	protected void waitUntilIsLoaded() {
+		PageHelper.ExplicitlyWait.until(ExpectedConditions.titleIs(EXPECTED_TITLE), driver);
 	}
 
 }
+

@@ -9,8 +9,8 @@ public class PopularPage extends PageBase {
 	}
 
 	@Override
-	protected void isLoaded() throws Error {
-
+	protected void waitUntilIsLoaded() {
+		// TODO Auto-generated method stub
 	}
 
 }

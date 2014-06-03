@@ -12,10 +12,10 @@ public class ArticlePage extends PageBase {
 		super(driver, previous);
 	}
 
-	@Override
-	protected void isLoaded() throws Error {
-		PageHelper.assertElementIsDisplayed(articleDiv, driver);
-	}
 
+	@Override
+	protected void waitUntilIsLoaded() {
+		PageHelper.ExplicitlyWait.untilElementIsVisible(articleDiv, driver);
+	}
 
 }

@@ -8,8 +8,9 @@ public class VideoPage extends PageBase {
 		super(driver, previous);
 	}
 
+
 	@Override
-	protected void isLoaded() throws Error {
+	protected void waitUntilIsLoaded() {
 		// TODO Auto-generated method stub
 	}
 

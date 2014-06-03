@@ -3,18 +3,23 @@ package me.alb_i986.selenium.forbes.lib.gui.pages;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RealTimePage extends PageBase {
 	
-	private static final String url = BASE_URL + "/real-time/";
+	public static final String URL = BASE_URL + "/real-time/";
+	public static final String PARTIAL_EXPECTED_TITLE = "Real Time";
 
 
 	public RealTimePage(WebDriver driver, Page previous) {
 		super(driver, previous);
+	}
+	
+
+	public static RealTimePage get(WebDriver driver) {
+		driver.get(URL);
+		return new RealTimePage(driver, null);
 	}
 
 
@@ -29,16 +34,8 @@ public class RealTimePage extends PageBase {
 		return randomTitle;
 	}
 
-
 	@Override
-	protected void load() {
-		driver.get(url);
-		super.load();
-	}
-
-
-	@Override
-	protected void isLoaded() throws Error {
-		Assert.assertTrue(driver.getTitle().contains("Real Time"));
+	protected void waitUntilIsLoaded() {
+		PageHelper.ExplicitlyWait.until(ExpectedConditions.titleContains(PARTIAL_EXPECTED_TITLE), driver);
 	}
 }

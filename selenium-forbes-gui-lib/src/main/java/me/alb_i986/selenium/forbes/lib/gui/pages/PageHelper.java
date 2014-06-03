@@ -7,8 +7,8 @@ import org.openqa.selenium.support.ui.*;
 
 
 /**
- * Static class providing helper functions that do common tasks
- * and solve common problems concerning Selenium WebDriver.
+ * Static class providing helper functions that solve
+ * common problems concerning Selenium WebDriver.
  * 
  * The static methods are grouped in static nested classes.
  *
@@ -270,6 +270,19 @@ public class PageHelper {
 			WebDriverWait wait = new WebDriverWait(driver, defaultTimeOutInSeconds);
 			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 			logger.debug("END Explicit wait: element identified by " + locator + " is present in the DOM");
+		}
+
+		/**
+		 * Generic explicit wait, taking an {@link ExpectedCondition} as a parameter.
+		 *  
+		 * @param expectedCondition
+		 * @param driver
+		 */
+		public static void until(ExpectedCondition<?> expectedCondition, WebDriver driver) {
+			logger.debug("BEGIN Explicit wait: waiting until " + expectedCondition);
+			WebDriverWait wait = new WebDriverWait(driver, defaultTimeOutInSeconds);
+			wait.until(expectedCondition);
+			logger.debug("END Explicit wait: " + expectedCondition);
 		}
 
 	}
