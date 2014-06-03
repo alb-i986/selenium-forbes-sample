@@ -28,22 +28,7 @@ public abstract class PageBase
 		PageFactory.initElements(driver, this);
 		topNavBar = new TopNavBar(driver, this);
 	}
-	
-
-	/**
-	 * @see WebDriver#getTitle()
-	 */
-	public String getTitle() {
-		return driver.getTitle();
-	}
-
-	/**
-	 * @see WebDriver#getPageSource()
-	 */
-	public String getPageSource() {
-		return driver.getPageSource();
-	}
-	
+		
 	
 	/**
 	 * @see WebDriver.Navigation#back()
@@ -65,7 +50,24 @@ public abstract class PageBase
 	public TopNavBar getTopMenu() {
 		return topNavBar ;
 	}
-	
+
+	/**
+	 * @see WebDriver#getTitle()
+	 */
+	public String getTitle() {
+		return driver.getTitle();
+	}
+
+	/**
+	 * @see WebDriver#getPageSource()
+	 */
+	public String getPageSource() {
+		return driver.getPageSource();
+	}
+
+	/**
+	 * @see WebDriver#getCurrentUrl()
+	 */
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
