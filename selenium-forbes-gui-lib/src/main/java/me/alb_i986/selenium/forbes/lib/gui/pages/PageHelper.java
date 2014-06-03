@@ -29,7 +29,7 @@ public class PageHelper {
 	 */
 	public static void assertElementIsDisplayed(By locator, WebDriver driver) {
 		try {
-			ExplicitlyWait.untilElementIsVisible(locator, driver);
+			ExplicitlyWait.until(ExpectedConditions.visibilityOfElementLocated(locator), driver);
 		} catch(TimeoutException e) {
 			throw new AssertionError("[assert KO] element " + locator + " is NOT displayed as expected", e);
 		}
@@ -47,7 +47,7 @@ public class PageHelper {
 	 */
 	public static void assertElementIsDisplayed(WebElement element, WebDriver driver) {
 		try {
-			ExplicitlyWait.untilElementIsVisible(element, driver);
+			ExplicitlyWait.until(ExpectedConditions.visibilityOf(element), driver);
 		} catch(TimeoutException e) {
 			throw new AssertionError("[assert KO] element " + element + " is NOT displayed as expected");
 		}
@@ -65,7 +65,7 @@ public class PageHelper {
 	 */
 	public static void assertElementIsNotDisplayed(By locator, WebDriver driver) {
 		try {
-			ExplicitlyWait.untilElementIsVisible(locator, driver);
+			ExplicitlyWait.until(ExpectedConditions.visibilityOfElementLocated(locator), driver);
 			throw new AssertionError("[assert KO] element " + locator + " is displayed; expected: NOT displayed");
 		} catch(TimeoutException e) {
 			logger.info("[assert OK] element " + locator + " is NOT displayed as expected");
@@ -141,8 +141,6 @@ public class PageHelper {
 	 */
 	public static class Form {
 
-		protected static final Logger logger = Logger.getLogger(Form.class);
-
 		/**
 		 * Enter the text with {@link WebElement#sendKeys(CharSequence...)} and loop
 		 * (max 50 attempts) until the text is found to have been actually fully entered.
@@ -186,101 +184,31 @@ public class PageHelper {
 	public static class ExplicitlyWait {
 
 		public static final long defaultTimeOutInSeconds = 15;
-		
-		private static final Logger logger = Logger.getLogger(ExplicitlyWait.class);
-
 
 		/**
-		 * Explicitly wait until the given element is visible.
-		 * Times out after the given number of seconds.
+		 * Generic explicit wait, taking an {@link ExpectedCondition} as a parameter.
+		 * Times out after {@link #defaultTimeOutInSeconds} seconds.
 		 *  
-		 * @param element a WebElement identifying the element to wait for
-		 * @param timeOutInSeconds
+		 * @param expectedCondition
+		 * @param driver
 		 * 
-		 * @throws TimeoutException if the given element is not displayed within the given number of seconds
+		 * @see #until(ExpectedCondition, WebDriver, long)
 		 */
-		public static void untilElementIsVisible(WebElement element, long timeOutInSeconds, WebDriver driver) {
-			logger.debug("BEGIN Explicit wait: waiting until element " + element + " is displayed");
-			WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-			wait.until(ExpectedConditions.visibilityOf(element));
-			logger.debug("END Explicit wait: element " + element + " got displayed");
-		}
-
-		/**
-		 * Times out after {@link #defaultTimeOutInSeconds} seconds.
-		 * 
-		 * @see #untilElementIsVisible(WebElement, long, WebDriver)
-		 */
-		public static void untilElementIsVisible(WebElement element, WebDriver driver) {
-			untilElementIsVisible(element, defaultTimeOutInSeconds, driver);
-		}
-
-		/**
-		 * Explicitly wait until the element identified by the given locator is visible.
-		 * Times out after the given number of seconds.
-		 *  
-		 * @param locator a By locator identifying the element to wait for
-		 * 
-		 * @throws TimeoutException if the given element is not displayed within the given number of seconds
-		 * 
-		 * @see #untilElementIsVisible(WebElement, long, WebDriver)
-		 */
-		public static void untilElementIsVisible(By locator, long timeOutInSeconds, WebDriver driver) {
-			logger.debug("BEGIN Explicit wait: waiting until element " + locator + " is visible");
-			WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-			logger.debug("END Explicit wait: element identified by " + locator + " got visible");
-		}
-		
-		/**
-		 * Times out after {@link #defaultTimeOutInSeconds} seconds.
-		 * 
-		 * @throws TimeoutException
-		 * @see #untilElementIsVisible(By, long, WebDriver)
-		 */
-		public static void untilElementIsVisible(By locator, WebDriver driver) {
-			untilElementIsVisible(locator, defaultTimeOutInSeconds, driver);
-		}
-		
-		/**
-		 * Explicitly wait until the element identified by the given locator is invisible.
-		 * Times out after {@value #defaultTimeOutInSeconds} seconds.
-		 */
-		public static void untilElementIsInvisible(By locator, WebDriver driver) {
-			untilElementIsInvisible(locator, driver, defaultTimeOutInSeconds);
-		}
-		
-		/**
-		 * Explicitly wait until the given element is invisible.
-		 * Times out after the given number of seconds.
-		 */
-		public static void untilElementIsInvisible(By locator, WebDriver driver, long timeOutInSeconds) {
-			logger.debug("BEGIN Explicit wait: waiting until element " + locator + " is invisible");
-			WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-			logger.debug("END Explicit wait: element identified by " + locator + " got invisible");
-		}
-		
-		/**
-		 * Explicitly wait until the element identified by the given locator is present in the DOM.
-		 * Times out after {@link #defaultTimeOutInSeconds} seconds.
-		 */
-		public static void untilElementIsPresent(By locator, WebDriver driver) {
-			logger.debug("BEGIN Explicit wait: waiting until element " + locator + " is present in the dom");
-			WebDriverWait wait = new WebDriverWait(driver, defaultTimeOutInSeconds);
-			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-			logger.debug("END Explicit wait: element identified by " + locator + " is present in the DOM");
+		public static void until(ExpectedCondition<?> expectedCondition, WebDriver driver) {
+			until(expectedCondition, driver, defaultTimeOutInSeconds);
 		}
 
 		/**
 		 * Generic explicit wait, taking an {@link ExpectedCondition} as a parameter.
+		 * Times out after the given number of seconds.
 		 *  
 		 * @param expectedCondition
 		 * @param driver
+		 * @param timeOutInSeconds
 		 */
-		public static void until(ExpectedCondition<?> expectedCondition, WebDriver driver) {
+		public static void until(ExpectedCondition<?> expectedCondition, WebDriver driver, long timeOutInSeconds) {
 			logger.debug("BEGIN Explicit wait: waiting until " + expectedCondition);
-			WebDriverWait wait = new WebDriverWait(driver, defaultTimeOutInSeconds);
+			WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
 			wait.until(expectedCondition);
 			logger.debug("END Explicit wait: " + expectedCondition);
 		}
