@@ -54,10 +54,6 @@ public class RealTimeStream extends PageComponent {
 		public boolean hasTitle(String expectedTitle) {
 			return getTitle().equals(expectedTitle);
 		}
-
-		public boolean isDisplayed() {
-			return root.isDisplayed();
-		}
 	}
 	
 	@Override

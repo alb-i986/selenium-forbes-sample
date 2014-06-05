@@ -2,7 +2,7 @@ package me.alb_i986.selenium.forbes.lib.gui.pages.components;
 
 import org.openqa.selenium.*;
 
-public class NestedPageComponent {
+public abstract class NestedPageComponent {
 	
 	protected WebElement root;
 
@@ -14,5 +14,7 @@ public class NestedPageComponent {
 		return root.findElement(locator);
 	}
 
-
+	public boolean isDisplayed() {
+		return root.isDisplayed();
+	}
 }
