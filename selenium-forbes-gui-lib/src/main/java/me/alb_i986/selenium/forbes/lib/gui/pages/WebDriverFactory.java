@@ -1,4 +1,4 @@
-package me.alb_i986.selenium.forbes.lib.gui;
+package me.alb_i986.selenium.forbes.lib.gui.pages;
 
 import java.util.concurrent.TimeUnit;
 

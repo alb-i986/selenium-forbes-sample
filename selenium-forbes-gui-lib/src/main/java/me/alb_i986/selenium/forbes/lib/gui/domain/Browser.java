@@ -1,9 +1,6 @@
 package me.alb_i986.selenium.forbes.lib.gui.domain;
 
-import me.alb_i986.selenium.forbes.lib.gui.WebDriverFactory;
-import me.alb_i986.selenium.forbes.lib.gui.pages.HomePage;
-import me.alb_i986.selenium.forbes.lib.gui.pages.PageBase;
-import me.alb_i986.selenium.forbes.lib.gui.pages.WelcomePage;
+import me.alb_i986.selenium.forbes.lib.gui.pages.*;
 
 import org.openqa.selenium.WebDriver;
 
