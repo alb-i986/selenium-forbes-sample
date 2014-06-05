@@ -13,7 +13,7 @@ public class WebDriverFactory {
 
 	public static final int IMPLICIT_WAIT_SECONDS = 10;
 	
-	public static SupportedBrowser browserType = SupportedBrowser.CHROME;
+	public static SupportedBrowser BROWSER_TYPE = SupportedBrowser.CHROME;
 
 	/**
 	 * Create and return a WebDriver instance of the given type.
@@ -42,8 +42,13 @@ public class WebDriverFactory {
 		return driver;
 	}
 
+	/**
+	 * @return a {@link WebDriver} according to {@link #BROWSER_TYPE}
+	 * 
+	 * @see #getWebDriver(SupportedBrowser)
+	 */
 	public static WebDriver getWebDriver() {
-		return getWebDriver(browserType);
+		return getWebDriver(BROWSER_TYPE);
 	}
 
 }
