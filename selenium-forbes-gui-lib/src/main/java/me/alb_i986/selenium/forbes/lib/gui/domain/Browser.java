@@ -50,4 +50,8 @@ public class Browser {
 		return new HomePage(driver, welcomePage);
 	}
 
+	public WebDriver getWebDriver() {
+		return driver;
+	}
+
 }

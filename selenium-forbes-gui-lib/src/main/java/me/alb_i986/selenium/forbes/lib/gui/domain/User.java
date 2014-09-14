@@ -70,4 +70,9 @@ public class User {
 		return this;
 	}
 
+
+	public Browser getBrowser() {
+		return browser;
+	}
+
 }
