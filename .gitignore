@@ -15,3 +15,7 @@ hs_err_pid*
 target/
 
 logs/
+
+
+# framework stuff
+selenium-tinafw.custom.properties
