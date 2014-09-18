@@ -35,7 +35,18 @@ public class PropertyLoader {
 			logger.warn("Cannot load properties from " + CUSTOM_PROPS_RESOURCE, e);
 		}
 	}
-
+	
+	/**
+	 * Convenience method for getting a config in the namespace "tinafw".
+	 * The prefix "tinafw." is prepended for you.
+	 * 
+	 * @param name the name of the wanted config without the prefix "tinafw."
+	 * @see #getConfig(String)
+	 */
+	public static String getTinaFwConfig(String name) {
+		return getConfig("tinafw." + name);
+	}
+	
 	/**
 	 * Load the given config value from one of the known sources.
 	 * The order of precedence is as follows:

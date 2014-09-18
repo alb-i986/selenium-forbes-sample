@@ -12,9 +12,9 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverFactory {
 
-	public static final int IMPLICIT_WAIT_SECONDS = Integer.valueOf(PropertyLoader.getConfig("tinafw.implicit_wait_seconds"));
+	public static final int IMPLICIT_WAIT_SECONDS = Integer.valueOf(PropertyLoader.getTinaFwConfig("implicit_wait_seconds"));
 	
-	public static SupportedBrowser BROWSER_TYPE = SupportedBrowser.valueOf(PropertyLoader.getConfig("tinafw.browser").toUpperCase());
+	public static SupportedBrowser BROWSER_TYPE = SupportedBrowser.valueOf(PropertyLoader.getTinaFwConfig("browser").toUpperCase());
 
 	/**
 	 * Create and return a WebDriver instance of the given type.

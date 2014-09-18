@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class PageBase implements Page {
 	
-	public final static String BASE_URL = PropertyLoader.getConfig("tinafw.base_url");
+	public final static String BASE_URL = PropertyLoader.getTinaFwConfig("base_url");
 	
 	protected static final Logger logger = Logger.getLogger(Page.class);
 
