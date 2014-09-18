@@ -3,6 +3,7 @@ package me.alb_i986.selenium.forbes.lib.gui.pages;
 import java.util.List;
 
 import me.alb_i986.selenium.forbes.lib.gui.pages.components.TopNavBar;
+import me.alb_i986.selenium.forbes.lib.utils.PropertyLoader;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class PageBase implements Page {
 	
-	public static String BASE_URL = "http://www.forbes.com";
+	public final static String BASE_URL = PropertyLoader.getConfig("tinafw.base_url");
 	
 	protected static final Logger logger = Logger.getLogger(Page.class);
 
