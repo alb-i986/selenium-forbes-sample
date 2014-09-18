@@ -3,6 +3,7 @@ package me.alb_i986.selenium.forbes.lib.gui.pages;
 import java.util.concurrent.TimeUnit;
 
 import me.alb_i986.selenium.forbes.lib.gui.domain.SupportedBrowser;
+import me.alb_i986.selenium.forbes.lib.utils.PropertyLoader;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,9 +12,9 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverFactory {
 
-	public static final int IMPLICIT_WAIT_SECONDS = 10;
+	public static final int IMPLICIT_WAIT_SECONDS = Integer.valueOf(PropertyLoader.getConfig("tinafw.implicit_wait_seconds"));
 	
-	public static SupportedBrowser BROWSER_TYPE = SupportedBrowser.CHROME;
+	public static SupportedBrowser BROWSER_TYPE = SupportedBrowser.valueOf(PropertyLoader.getConfig("tinafw.browser").toUpperCase());
 
 	/**
 	 * Create and return a WebDriver instance of the given type.
