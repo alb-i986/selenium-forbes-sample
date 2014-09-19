@@ -1,5 +1,7 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages;
 
+import me.alb_i986.selenium.tinafw.pages.Page;
+
 import org.openqa.selenium.WebDriver;
 
 public class PopularPage extends PageBase {

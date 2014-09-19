@@ -1,6 +1,7 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages.components;
 
 import me.alb_i986.selenium.forbes.lib.gui.pages.*;
+import me.alb_i986.selenium.tinafw.pages.Page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;

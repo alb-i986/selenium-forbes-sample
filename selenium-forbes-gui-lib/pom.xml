@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>me.alb-i986</groupId>
+		<groupId>me.alb-i986.selenium</groupId>
 		<artifactId>selenium-forbes</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -27,9 +27,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>2.43.1</version>
+			<groupId>me.alb-i986.selenium</groupId>
+			<artifactId>selenium-tinafw</artifactId>
+			<version>0.0.5-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

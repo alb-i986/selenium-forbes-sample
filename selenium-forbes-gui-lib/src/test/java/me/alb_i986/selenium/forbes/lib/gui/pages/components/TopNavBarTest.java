@@ -1,21 +1,22 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages.components;
 
-import me.alb_i986.selenium.forbes.lib.gui.domain.User;
+import me.alb_i986.selenium.forbes.lib.gui.domain.ForbesUser;
 import me.alb_i986.selenium.forbes.lib.gui.pages.HomePage;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.openqa.selenium.WebDriver;
 
 @RunWith(JUnit4.class)
 public class TopNavBarTest extends PageTestBase {
 	
-	private User user;
+	private ForbesUser user;
 	private TopNavBar componentUnderTest;
 
 	
 	public TopNavBarTest() {
-		user = new User();
+		user = new ForbesUser();
 	}
 
 
@@ -30,7 +31,9 @@ public class TopNavBarTest extends PageTestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		HomePage homePage = user.openBrowser();
+		user.openBrowser();
+		WebDriver driver = user.getBrowser().getWebDriver();
+		HomePage homePage = HomePage.get(driver);
 		componentUnderTest = homePage.getTopMenu();
 	}
 

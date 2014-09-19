@@ -1,5 +1,8 @@
 package me.alb_i986.selenium.forbes.lib.gui.pages;
 
+import me.alb_i986.selenium.tinafw.pages.Page;
+import me.alb_i986.selenium.tinafw.pages.PageHelper;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +25,7 @@ public class WelcomePage extends PageBase {
 	
 	@Override
 	protected void waitUntilIsLoaded() {
-		PageHelper.ExplicitlyWait.until(ExpectedConditions.titleIs(EXPECTED_TITLE), driver);
+		PageHelper.waitUntil(ExpectedConditions.titleIs(EXPECTED_TITLE), driver);
 	}
 	
 }
