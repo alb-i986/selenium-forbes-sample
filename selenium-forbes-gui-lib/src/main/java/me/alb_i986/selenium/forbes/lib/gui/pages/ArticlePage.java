@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ArticlePage extends PageBase {
 
-	@FindBy(css = "#abovefold div.article")
+	@FindBy(css = "div.article_container div.article_content")
 	private WebElement articleDiv;
 	
 	public ArticlePage(WebDriver driver, Page previous) {

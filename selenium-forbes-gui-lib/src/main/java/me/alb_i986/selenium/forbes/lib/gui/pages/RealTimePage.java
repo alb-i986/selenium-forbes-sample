@@ -32,10 +32,23 @@ public class RealTimePage extends PageBase {
 		channelNav.selectChannel(channel);
 		return this;
 	}
-	
+
 	public ArticlePage gotoArticle(String articleTitle) {
 		stream
 			.getEntry(articleTitle)
+			.clickLinkToArticle();
+		return new ArticlePage(driver, this);
+	}
+	
+	/**
+	 * Go to the the index-th article.
+	 * 
+	 * @param index 0-based
+	 * @return
+	 */
+	public ArticlePage gotoArticle(int index) {
+		stream
+			.getEntry(index)
 			.clickLinkToArticle();
 		return new ArticlePage(driver, this);
 	}

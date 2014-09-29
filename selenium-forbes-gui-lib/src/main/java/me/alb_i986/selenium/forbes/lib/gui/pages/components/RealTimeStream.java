@@ -34,10 +34,17 @@ public class RealTimeStream extends PageComponent {
 		return foundEntry;
 	}
 
+	public StreamEntry getEntry(int index) {
+		WebElement entry = visibleArticles.get(index);
+		if(!entry.isDisplayed())
+			return null;
+		return new StreamEntry(entry);
+	}
+
 	
 	public class StreamEntry extends NestedPageComponent {
 		
-		private By titleLocator = By.cssSelector("article h2");
+		private By titleLocator = By.cssSelector("article h2 a");
 
 		public StreamEntry(WebElement root) {
 			super(root);
@@ -60,4 +67,5 @@ public class RealTimeStream extends PageComponent {
 	public By getRootLocator() {
 		return By.cssSelector(ROOT_CSS_SELECTOR);
 	}
+
 }
